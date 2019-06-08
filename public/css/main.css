@@ -1,7 +1,13 @@
+body{
+    background-color:#0a2930;
+}
 svg{
-    /* background-color:#0a2930; */
     width: -webkit-fill-available;
     height: -webkit-fill-available;
+}
+
+.row{
+    width: 100%;
 }
 
 line.link {

@@ -1,11 +1,11 @@
-var width = 960;
-var height = 600;
+var width = document.getElementById('fsvgcont').clientWidth;
+var height = document.getElementById('fsvgcont').clientHeight;
 var COLLAPSE_LEVEL = 1;
 var root;
 var force = d3.layout.force()
-    .linkDistance(90)
-    .charge(-600)
-    .gravity(0.1)
+    .linkDistance(100)
+    .charge(-1000)
+    .gravity(0.2)
     .size([width, height])
     .on("tick", tick);
 
@@ -83,8 +83,14 @@ window.onload = function(){
         console.log(root)
         function parseLevel(node, level) {
             node.level = level;
+            var name;
+            if(node.level == 1){
+                name = node.name;
+            }
             if (typeof node.children !== 'undefined') {
+
               node.children.forEach(function(children) {
+                  children.parent = name;
                 parseLevel(children, level + 1);
               });
             }
@@ -177,10 +183,14 @@ function update() {
             if(d.level <= 1){
                 return d.name;
             }
-            else{
-                return d.year;
+            else {
+                let yearnum = parseInt(d.year.substr(0, 4)) - 4
+                let nextYear = yearnum + 20
+                let bintext = yearnum + " - " + nextYear
+                return bintext
             }
-        });
+        })
+        .on("click", click);
         // .call(force.drag);
 
         // Exit any old nodes.
@@ -201,7 +211,7 @@ function update() {
   
   // Color leaf nodes orange, and packages white or blue.
   function color(d) {
-    return d._children ? "#3182bd" : d.children ? "#c6dbef" : "#fd8d3c";
+    return d._children ? "#9b0535" : d.children ? "#86ff3a" : "#00dcff";
   }
   
   // Toggle children on click.
@@ -215,8 +225,14 @@ function update() {
         d.children = d._children;
         d._children = null;
       }
-      update();
+      if(d.level > 1){
+          $.getJSON(`/data/year=${d.year}&parent=${d.parent}`, function(data){
+              console.log(data);
+          })
+        //   console.log(d.year, d.parent);
+      }
     }
+    update();
   }
   
   // Returns a list of all nodes under the root.
