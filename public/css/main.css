@@ -1,0 +1,11 @@
+svg{
+    /* background-color:#0a2930; */
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+}
+
+line.link {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1.5px;
+  }
