@@ -13,7 +13,7 @@ var svg = d3.select("#mainsvg");
 
 var link = svg.selectAll(".link");
 var node = svg.selectAll(".node");
-
+var t = svg.selectAll(".t-node");
 function toggle(d) {
     if (d.children) {
       d._children = d.children;
@@ -115,9 +115,9 @@ window.onload = function(){
 }
 
 function update() {
-    var nodes = flatten(root),
+    var nodes = flatten(root).slice(0, -1),
         links = d3.layout.tree().links(nodes);
-  
+    console.log(nodes);
     // Restart the force layout.
     force
         .nodes(nodes)
@@ -164,6 +164,27 @@ function update() {
         .style("fill", color)
         .on("click", click)
         .call(force.drag);
+        
+        t = t.data(nodes, function(d) { return d.id; })
+        .style("fill", color);
+
+        // Enter any new nodes.
+        t.enter().append("svg:text")
+        .attr("class", "t-node")
+        .attr("dx", "25px")
+        .attr("y", 0)
+        .text(function(d){
+            if(d.level <= 1){
+                return d.name;
+            }
+            else{
+                return d.year;
+            }
+        });
+        // .call(force.drag);
+
+        // Exit any old nodes.
+        t.exit().remove();
   }
   
   function tick() {
@@ -174,6 +195,8 @@ function update() {
   
     node.attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; });
+    t.attr("x", function(d) { return d.x; })
+    .attr("y", function(d) { return d.y; }); 
   }
   
   // Color leaf nodes orange, and packages white or blue.
