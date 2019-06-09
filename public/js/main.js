@@ -3,17 +3,44 @@ var height = document.getElementById('fsvgcont').clientHeight;
 var COLLAPSE_LEVEL = 1;
 var root;
 var force = d3.layout.force()
-    .linkDistance(100)
-    .charge(-1000)
-    .gravity(0.2)
-    .size([width, height])
-    .on("tick", tick);
+.linkDistance(100)
+.charge(-1000)
+.gravity(0.2)
+.size([width, height])
+.on("tick", tick);
 
 var svg = d3.select("#mainsvg");
 
 var link = svg.selectAll(".link");
 var node = svg.selectAll(".node");
 var t = svg.selectAll(".t-node");
+
+var margin = {top: 20, right: 20, bottom: 30, left: 80}
+var otherwidth = document.getElementById('othersvg').clientWidth - margin.left - margin.right;
+var otherheight = document.getElementById('othersvg').clientHeight - margin.top - margin.bottom;
+
+// setup x 
+var xValue = function(d) { return d.averageRating;}, // data -> value
+    xScale = d3.scale.linear().range([0, otherwidth]), // value -> display
+    xMap = function(d) { return xScale(xValue(d));}, // data -> display
+    xAxis = d3.svg.axis().scale(xScale).orient("bottom");
+
+
+// setup y
+var yValue = function(d) { return d["profit"];}, // data -> value
+    yScale = d3.scale.linear().range([otherheight, 0]), // value -> display
+    yMap = function(d) { return yScale(yValue(d));}, // data -> display
+    yAxis = d3.svg.axis().scale(yScale).orient("left");
+
+
+// setup fill color
+var cValue = function(d) { return d.startYear;},
+    mcolor = d3.scale.category10();
+
+var othersvg = d3.select('#othsvg')
+                    .append("g")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
 function toggle(d) {
     if (d.children) {
       d._children = d.children;
@@ -32,7 +59,7 @@ window.onload = function(){
         // get top 20
         var genres = groupdata.children
                     .sort(function(x, y){
-                        console.log(x, y)
+                        // console.log(x, y)
                         let xsum = 0
                         let ysum = 0
                         for(var child of x.children){
@@ -123,7 +150,7 @@ window.onload = function(){
 function update() {
     var nodes = flatten(root).slice(0, -1),
         links = d3.layout.tree().links(nodes);
-    console.log(nodes);
+    // console.log(nodes);
     // Restart the force layout.
     force
         .nodes(nodes)
@@ -226,15 +253,98 @@ function update() {
         d._children = null;
       }
       if(d.level > 1){
+            
           $.getJSON(`/data/year=${d.year}&parent=${d.parent}`, function(data){
-              console.log(data);
-          })
-        //   console.log(d.year, d.parent);
-      }
+              drawPlot(data);
+            })
+            //   console.log(d.year, d.parent);
+        }
     }
     update();
+}
+
+function drawPlot(data){
+    data.forEach(function(d) {
+        d.averageRating = +d.averageRating;
+        d["profit"] = +d["profit"];
+        //    console.log(d);
+    });
+    
+        // d3.selectAll("#othsvg > *").remove();
+    // don't want dots overlapping axis, so add in buffer to data domain
+      xScale.domain([d3.min(data, xValue)-1, d3.max(data, xValue)+1]);
+      yScale.domain([d3.min(data, yValue)-1, d3.max(data, yValue)+1]);
+    
+      // x-axis
+      othersvg.append("g")
+          .attr("class", "x axis")
+          .attr("transform", "translate(0," + height + ")")
+          .call(xAxis)
+        .append("text")
+          .attr("class", "label")
+          .attr("x", width)
+          .attr("y", -6)
+          .style("text-anchor", "end")
+          .text("Calories");
+    
+      // y-axis
+      othersvg.append("g")
+          .attr("class", "y axis")
+          .call(yAxis)
+        .append("text")
+          .attr("class", "label")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 6)
+          .attr("dy", ".71em")
+          .style("text-anchor", "end")
+          .text("Protein (g)");
+    
+      // draw dots
+      othersvg.selectAll(".dot")
+          .data(data)
+        .enter().append("circle")
+          .attr("class", "dot")
+          .attr("r", 3.5)
+          .attr("cx", xMap)
+          .attr("cy", yMap)
+          .style("fill", function(d) { return color(cValue(d));}) 
+          .on("mouseover", function(d) {
+              tooltip.transition()
+                   .duration(200)
+                   .style("opacity", .9);
+              tooltip.html(d["Cereal Name"] + "<br/> (" + xValue(d) 
+                + ", " + yValue(d) + ")")
+                   .style("left", (d3.event.pageX + 5) + "px")
+                   .style("top", (d3.event.pageY - 28) + "px");
+          })
+          .on("mouseout", function(d) {
+              tooltip.transition()
+                   .duration(500)
+                   .style("opacity", 0);
+          });
+    
+      // draw legend
+      var legend = othersvg.selectAll(".legend")
+          .data(mcolor.domain())
+        .enter().append("g")
+          .attr("class", "legend")
+          .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+    
+      // draw legend colored rectangles
+      legend.append("rect")
+          .attr("x", width - 18)
+          .attr("width", 18)
+          .attr("height", 18)
+          .style("fill", color);
+    
+      // draw legend text
+      legend.append("text")
+          .attr("x", width - 24)
+          .attr("y", 9)
+          .attr("dy", ".35em")
+          .style("text-anchor", "end")
+          .text(function(d) { return d;})
   }
-  
   // Returns a list of all nodes under the root.
   function flatten(root) {
     var nodes = [], i = 0;

@@ -16,18 +16,25 @@ app.get('/', (req, res) => {
 });
 
 app.get('/data/year=:year&parent=:parent', (req, res) => {
-    res.send({a: 2, b: 4})
+    // res.send({a: 2, b: 4})
     let year = req.params["year"];
     let genre = req.params["parent"];
 
     // console.log(__filename)
     var spawn = require("child_process").spawn;
     var process = spawn('python', ["./test.py",
-        year
+        year, genre
     ]);
     process.stdout.on("data", function (data) {
-        console.log(data.toString());
-        // res.send(data);
+        // console.log(data.toString());
+        try{
+            console.log(data.toString());
+            res.send(JSON.parse(data));
+        }
+        catch(e){
+            console.log(e)
+            res.send({error: e})
+        }
     });    
     // console.log(out);
     
