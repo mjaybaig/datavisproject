@@ -24,7 +24,7 @@ filtered = datafile[(datafile['startYearEdited'].notna()) &
                     (datafile['originalTitle'].notna()) &
                     (datafile['originalTitle'].str.isalpha()) &
                     (datafile['profit'].notna()) &
-                    (datafile['profit'] > 0) &
+                    # (datafile['profit'] > 0) &
                     (datafile['moviescore'].notna()) &
                     (datafile['genres'].notna()) &
                     (datafile['startYearEdited'] >= datetime.datetime.strptime(year, '%Y-%m-%d')) & 

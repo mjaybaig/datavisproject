@@ -36,11 +36,9 @@ var yValue = function(d) { return d["profit"];}, // data -> value
 // setup fill color
 var cValue = function(d) { return d.startYear;},
     mcolor = d3.scale.category10();
-
-var othersvg = d3.select('#othsvg')
-                    .append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+var tooltip = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
 function toggle(d) {
     if (d.children) {
       d._children = d.children;
@@ -264,13 +262,23 @@ function update() {
 }
 
 function drawPlot(data){
+    
+    if(document.getElementById('othsvg') && document.getElementById('othsvg').childElementCount > 0){
+        for(let i of document.getElementById('othsvg').children){
+            console.log(i);
+            document.getElementById('othsvg').removeChild(i);
+        }
+    }
+    var othersvg = d3.select('#othsvg')
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    console.log(document.getElementById('othsvg'))
     data.forEach(function(d) {
         d.averageRating = +d.averageRating;
         d["profit"] = +d["profit"];
         //    console.log(d);
     });
-    
-        // d3.selectAll("#othsvg > *").remove();
     // don't want dots overlapping axis, so add in buffer to data domain
       xScale.domain([d3.min(data, xValue)-1, d3.max(data, xValue)+1]);
       yScale.domain([d3.min(data, yValue)-1, d3.max(data, yValue)+1]);
@@ -285,7 +293,7 @@ function drawPlot(data){
           .attr("x", width)
           .attr("y", -6)
           .style("text-anchor", "end")
-          .text("Calories");
+          .text("Average Raing");
     
       // y-axis
       othersvg.append("g")
@@ -297,23 +305,28 @@ function drawPlot(data){
           .attr("y", 6)
           .attr("dy", ".71em")
           .style("text-anchor", "end")
-          .text("Protein (g)");
+          .text("Profit (USD)");
     
       // draw dots
       othersvg.selectAll(".dot")
           .data(data)
-        .enter().append("circle")
+        .enter().append("text")
           .attr("class", "dot")
-          .attr("r", 3.5)
-          .attr("cx", xMap)
-          .attr("cy", yMap)
-          .style("fill", function(d) { return color(cValue(d));}) 
+        //   .attr("r", 3.5)
+          .attr("x", xMap)
+          .attr("y", yMap)
+          .attr("stroke-width", 0)
+          .attr("fill-opacity", 0.4)
+          .text(function(d){
+              return d.originalTitle;
+          })
+          .style("fill", function(d) { return mcolor(cValue(d));}) 
           .on("mouseover", function(d) {
               tooltip.transition()
                    .duration(200)
                    .style("opacity", .9);
-              tooltip.html(d["Cereal Name"] + "<br/> (" + xValue(d) 
-                + ", " + yValue(d) + ")")
+              tooltip.html(d["originalTitle"] + "<br/> (" + d['profit'] 
+                + ", " + d['averageRating'] + ")")
                    .style("left", (d3.event.pageX + 5) + "px")
                    .style("top", (d3.event.pageY - 28) + "px");
           })
@@ -335,7 +348,7 @@ function drawPlot(data){
           .attr("x", width - 18)
           .attr("width", 18)
           .attr("height", 18)
-          .style("fill", color);
+          .style("fill", mcolor);
     
       // draw legend text
       legend.append("text")
