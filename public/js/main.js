@@ -19,17 +19,19 @@ var margin = {top: 20, right: 20, bottom: 30, left: 80}
 var otherwidth = document.getElementById('othersvg').clientWidth - margin.left - margin.right;
 var otherheight = document.getElementById('othersvg').clientHeight - margin.top - margin.bottom;
 
-// setup x 
-var xValue = function(d) { return d.averageRating;}, // data -> value
-    xScale = d3.scale.linear().range([0, otherwidth]), // value -> display
-    xMap = function(d) { return xScale(xValue(d));}, // data -> display
-    xAxis = d3.svg.axis().scale(xScale).orient("bottom");
+// // setup x 
+// var xValue = function(d) { return d.startYear;}, // data -> value
+//     xScale = d3.scale.linear().range([0, otherwidth]), // value -> display
+//     xMap = function(d) { return xScale(xValue(d));}, // data -> display
+//     xAxis = d3.svg.axis().scale(xScale).orient("bottom");
+
 
 
 // setup y
-var yValue = function(d) { return d["profit"];}, // data -> value
+var yValue = function(d) { return d["moviescore"];}, // data -> value
     yScale = d3.scale.linear().range([otherheight, 0]), // value -> display
-    yMap = function(d) { return yScale(yValue(d));}, // data -> display
+    // yMap = function(d) { return -1 * yScale(yValue(d));}, // data -> display
+    // yMap = function(d) { return -1 * yScale(yValue(d));}, // data -> display
     yAxis = d3.svg.axis().scale(yScale).orient("left");
 
 
@@ -39,6 +41,7 @@ var cValue = function(d) { return d.startYear;},
 var tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
+
 function toggle(d) {
     if (d.children) {
       d._children = d.children;
@@ -197,7 +200,7 @@ function update() {
         .call(force.drag);
         
         t = t.data(nodes, function(d) { return d.id; })
-        .style("fill", color);
+            .style("fill", color);
 
         // Enter any new nodes.
         t.enter().append("svg:text")
@@ -215,8 +218,8 @@ function update() {
                 return bintext
             }
         })
-        .on("click", click);
-        // .call(force.drag);
+        .on("click", click)
+        .call(force.drag);
 
         // Exit any old nodes.
         t.exit().remove();
@@ -262,102 +265,228 @@ function update() {
 }
 
 function drawPlot(data){
-    
-    if(document.getElementById('othsvg') && document.getElementById('othsvg').childElementCount > 0){
-        for(let i of document.getElementById('othsvg').children){
-            console.log(i);
-            document.getElementById('othsvg').removeChild(i);
+        if(!data || data.length < 1){
+            console.log("Empty Values returned. Try something else")
+            return
         }
-    }
-    var othersvg = d3.select('#othsvg')
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        // setup x 
+        data.forEach(function(d){
+            console.log(d);
+            d.year = d3.time.format("%Y-%m-%d").parse(d.startYear);
+        })
+        var dataXrange = d3.extent(data, function(d){return d.year})
+                // maximum date range allowed to display
+        var mindate = dataXrange[0],  // use the range of the data
+        maxdate = dataXrange[1];
 
-    console.log(document.getElementById('othsvg'))
-    data.forEach(function(d) {
-        d.averageRating = +d.averageRating;
-        d["profit"] = +d["profit"];
-        //    console.log(d);
-    });
-    // don't want dots overlapping axis, so add in buffer to data domain
-      xScale.domain([d3.min(data, xValue)-1, d3.max(data, xValue)+1]);
-      yScale.domain([d3.min(data, yValue)-1, d3.max(data, yValue)+1]);
-    
-      // x-axis
-      othersvg.append("g")
-          .attr("class", "x axis")
-          .attr("transform", "translate(0," + height + ")")
-          .call(xAxis)
-        .append("text")
-          .attr("class", "label")
-          .attr("x", width)
-          .attr("y", -6)
-          .style("text-anchor", "end")
-          .text("Average Raing");
-    
-      // y-axis
-      othersvg.append("g")
-          .attr("class", "y axis")
-          .call(yAxis)
-        .append("text")
-          .attr("class", "label")
-          .attr("transform", "rotate(-90)")
-          .attr("y", 6)
-          .attr("dy", ".71em")
-          .style("text-anchor", "end")
-          .text("Profit (USD)");
-    
-      // draw dots
-      othersvg.selectAll(".dot")
-          .data(data)
-        .enter().append("text")
-          .attr("class", "dot")
-        //   .attr("r", 3.5)
-          .attr("x", xMap)
-          .attr("y", yMap)
-          .attr("stroke-width", 0)
-          .attr("fill-opacity", 0.4)
-          .text(function(d){
-              return d.originalTitle;
-          })
-          .style("fill", function(d) { return mcolor(cValue(d));}) 
-          .on("mouseover", function(d) {
-              tooltip.transition()
-                   .duration(200)
-                   .style("opacity", .9);
-              tooltip.html(d["originalTitle"] + "<br/> (" + d['profit'] 
-                + ", " + d['averageRating'] + ")")
-                   .style("left", (d3.event.pageX + 5) + "px")
-                   .style("top", (d3.event.pageY - 28) + "px");
-          })
-          .on("mouseout", function(d) {
-              tooltip.transition()
-                   .duration(500)
-                   .style("opacity", 0);
-          });
-    
-      // draw legend
-      var legend = othersvg.selectAll(".legend")
-          .data(mcolor.domain())
-        .enter().append("g")
-          .attr("class", "legend")
-          .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
-    
-      // draw legend colored rectangles
-      legend.append("rect")
-          .attr("x", width - 18)
-          .attr("width", 18)
-          .attr("height", 18)
-          .style("fill", mcolor);
-    
-      // draw legend text
-      legend.append("text")
-          .attr("x", width - 24)
-          .attr("y", 9)
-          .attr("dy", ".35em")
-          .style("text-anchor", "end")
-          .text(function(d) { return d;})
+
+        var DateFormat	  =  d3.time.format("%Y");
+
+        var dynamicDateFormat = timeFormat([
+            [d3.time.format("%Y"), function() { return true; }],// <-- how to display when Jan 1 YYYY
+            [d3.time.format("%b %Y"), function(d) { return d.getMonth(); }],
+            [function(){return "";}, function(d) { return d.getDate() != 1; }]
+        ]);
+
+        console.log(data)
+        if(document.getElementById('othsvg') && document.getElementById('othsvg').childElementCount > 0){
+            for(let i of document.getElementById('othsvg').children){
+                console.log(i);
+                document.getElementById('othsvg').removeChild(i);
+            }
+        }
+        var othersvg = d3.select('#othsvg')
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        console.log(document.getElementById('othsvg'))
+        data.forEach(function(d) {
+            d.averageRating = +d.averageRating;
+            d["profit"] = +d["profit"];
+            //    console.log(d);
+        });
+        // don't want dots overlapping axis, so add in buffer to data domain
+        // xScale.domain([d3.min(data, xValue)-1, d3.max(data, xValue)+1]);
+        yScale.domain([d3.min(data, yValue)-1, d3.max(data, yValue)+1]);
+        
+        
+        /* === Context chart === */
+
+        var margin_context = {top: 320, right: 30, bottom: 20, left: 20},
+        height_context = otherheight - margin_context.top - margin_context.bottom;
+        
+        var x = d3.time.scale()
+            .range([0, (otherwidth)])
+            .domain(dataXrange);
+
+        
+        var xAxis = d3.svg.axis()
+            .scale(x)
+            .orient("bottom")
+                .tickSize(-(otherheight))
+            .ticks(d3.time.year, 1)
+            .tickFormat(DateFormat);
+
+
+        /* === Context Chart === */            
+        var x2 = d3.time.scale()
+            .range([0, otherwidth])
+            .domain([mindate, maxdate]);
+
+        var y2 = d3.scale.linear()
+            .range([height_context, 0])
+            .domain(yScale.domain());
+
+        var xAxis_context = d3.svg.axis()
+            .scale(x2)
+            .orient("bottom")
+            .ticks(customTickFunction)
+            .tickFormat(DateFormat);
+
+
+        // x-axis
+        othersvg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + otherheight + ")")
+            .call(xAxis)
+            .append("text")
+            .attr("class", "label")
+            .attr("x", otherwidth)
+            .attr("y", -6)
+            .style("text-anchor", "end")
+            .text("Year");
+        
+        // y-axis
+        othersvg.append("g")
+            .attr("class", "y axis")
+            .call(yAxis)
+            .append("text")
+            .attr("class", "label")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", ".71em")
+            .style("text-anchor", "end")
+            .text("P(NR) Score");
+        // console.log(x(da))
+        console.log(x(data[0].year))
+            // draw dots
+        othersvg.selectAll(".dot")
+                .data(data)
+                .enter().append("text")
+                .attr("class", "dot")
+                //   .attr("r", 3.5)
+                .attr("x", function(d){ 
+                    var max = 50
+                    var min = -50
+                    var offset = Math.random() * (+max - +min) - +min;
+                    return x(d.year) + offset
+                })
+                .attr("y", function(d) {
+                    return yScale(d.moviescore) 
+                })
+        // .attr('transform', 'rotate(30)')
+            .attr("stroke-width", 0.2)
+            .attr("fill-opacity", 0.6)
+            .text(function(d){
+                return d.originalTitle;
+            })
+            .style("fill", function(d) { return mcolor(cValue(d));}) 
+            .on("mouseover", function(d) {
+                tooltip.transition()
+                    .duration(200)
+                    .style("opacity", 0.8);
+                    var eX = d3.event.pageX;
+                    var eY = d3.event.pageY; 
+                tooltip.html(`
+                    <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+                        <div class="card-header">${d["originalTitle"]}(${d.year.getFullYear()})</div>
+                        <div class="card-body">
+                        <h5 class="card-title"> Average Rating: ${d.averageRating}</h5>
+                        <p class="card-text"> Total Votes: ${d.numVotes}</p>
+                        <p class="card-text"> Profit: ${d.profit > 0? d.profit: 'N/A'}</p>
+                        </div>
+                    </div>
+                    `)
+                    .style("left", eX + "px")
+                    .style("top", eY - 20 + "px");
+                    console.log(d3.event.pageY, tooltip.attr('clientHeight'));
+                    console.log(d3.event.pageY - tooltip.attr('height'));
+            })
+            .on("click", function(d){
+                window.open(`http://imdb.com/title/${d.tconst}`, '_blank')
+            })
+            .on("mouseout", function(d) {
+                tooltip.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+        });
+        
+        // // draw legend
+        // var legend = othersvg.selectAll(".legend")
+        //     .data(mcolor.domain())
+        //     .enter().append("g")
+        //     .attr("class", "legend")
+        //     .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+        
+        // // draw legend colored rectangles
+        // legend.append("rect")
+        //     .attr("x", width - 18)
+        //     .attr("width", 18)
+        //     .attr("height", 18)
+        //     .style("fill", mcolor);
+        
+        // // draw legend text
+        // legend.append("text")
+        //     .attr("x", width - 24)
+        //     .attr("y", 9)
+        //     .attr("dy", ".35em")
+        //     .style("text-anchor", "end")
+        //     .text(function(d) { return d;})
+
+        //     $('html, body').animate({
+        //         scrollTop: $('#othsvg').offset().top
+        //     }, 800, function(){
+        //     // Add hash (#) to URL when done scrolling (default click behavior)
+        //         window.location.hash = '#othsvg';
+        //     });
+
   }
+
+  $(document).ajaxStart(function() {
+    $(document.body).css({'cursor' : 'wait'});
+}).ajaxStop(function() {
+    $(document.body).css({'cursor' : 'default'});
+});
+function customTickFunction(t0, t1, dt)  {
+    var labelSize = 42; //
+    var maxTotalLabels = Math.floor(width / labelSize);
+
+    function step(date, offset)
+    {
+        date.setMonth(date.getMonth() + offset);
+    }
+
+    var time = d3.time.month.ceil(t0), times = [], monthFactors = [1,3,4,12];
+
+    while (time < t1) times.push(new Date(+time)), step(time, 1);
+    var timesCopy = times;
+    var i;
+    for(i=0 ; times.length > maxTotalLabels ; i++)
+        times = _.filter(timesCopy, function(d){
+            return (d.getMonth()) % monthFactors[i] == 0;
+        });
+
+    return times;
+}
+
+function timeFormat(formats) {
+    return function(date) {
+      var i = formats.length - 1, f = formats[i];
+      while (!f[1](date)) f = formats[--i];
+      return f[0](date);
+    };
+  };
+
   // Returns a list of all nodes under the root.
   function flatten(root) {
     var nodes = [], i = 0;

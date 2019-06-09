@@ -9,6 +9,7 @@ app.use(express.static(path.join(__dirname, '/data/')));
 app.use('/css', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/css')));
 app.use('/js', express.static(path.join(__dirname, '/node_modules/jquery/dist')));
 app.use('/js', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/js')));
+app.use('/js', express.static(path.join(__dirname, '/node_modules/underscore')));
 app.use('/js', express.static(path.join(__dirname, '/node_modules/d3')));
 
 app.get('/', (req, res) => {
@@ -33,9 +34,9 @@ app.get('/data/year=:year&parent=:parent', (req, res) => {
         }
         catch(e){
             console.log(e)
-            res.send({error: e})
+            res.send({error: e.message})
         }
-    });    
+    });
     // console.log(out);
     
     // R("script.R")

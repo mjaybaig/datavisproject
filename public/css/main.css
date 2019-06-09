@@ -31,11 +31,21 @@ line.link {
 
 .tooltip {
   position: absolute;
-  width: 200px;
-  height: 28px;
+  width: auto;
+  height: auto;
   pointer-events: none;
 }
 
-#othsvg{
+#othersvg{
     background-color: whitesmoke;
+}
+
+#othsvg{
+    width: 100%;
+    background-color: whitesmoke;
+}
+
+text{
+    -webkit-filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));
+    filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));
 }

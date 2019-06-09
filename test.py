@@ -22,7 +22,7 @@ filtered = datafile[(datafile['startYearEdited'].notna()) &
                     (datafile['numVotes'].notna()) &
                     (datafile['averageRating'].notna()) &
                     (datafile['originalTitle'].notna()) &
-                    (datafile['originalTitle'].str.isalpha()) &
+                    (datafile['originalTitle'].str.isalnum()) &
                     (datafile['profit'].notna()) &
                     # (datafile['profit'] > 0) &
                     (datafile['moviescore'].notna()) &
