@@ -12,6 +12,7 @@
     "bootstrap": "^4.2.1",
     "chalk": "^2.4.1",
     "child_process": "^1.0.2",
+    "css-loader": "^2.1.1",
     "d3": "^3",
     "debug": "^4.1.1",
     "ejs": "^2.6.1",
@@ -22,6 +23,8 @@
     "popper.js": "^1.14.6",
     "pug": "^2.0.3",
     "r-script": "git+https://git@github.com/khamurdik/r-script.git",
+    "script-loader": "^0.7.2",
+    "style-loader": "^0.23.1",
     "underscore": "^1.9.1"
   },
   "devDependencies": {
