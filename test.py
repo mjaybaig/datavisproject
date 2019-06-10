@@ -23,6 +23,7 @@ filtered = datafile[(datafile['startYearEdited'].notna()) &
                     (datafile['averageRating'].notna()) &
                     (datafile['originalTitle'].notna()) &
                     (datafile['originalTitle'].str.isalnum()) &
+                    # (datafile['originalTitle'].str.match(r"^ ?(\w*[-_) (!#$&]*)+$")) &
                     (datafile['profit'].notna()) &
                     # (datafile['profit'] > 0) &
                     (datafile['moviescore'].notna()) &
@@ -32,7 +33,7 @@ filtered = datafile[(datafile['startYearEdited'].notna()) &
                     (datafile['genres'].apply(lambda x: x.lower()) == genre.lower())
                     ]
 #%%
-filtered = filtered[filtered['moviescore'].notna()].sort_values('moviescore', ascending=False)
+filtered = filtered.sort_values('moviescore', ascending=False)
 
 
 #%%

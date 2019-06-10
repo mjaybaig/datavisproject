@@ -125,9 +125,6 @@ window.onload = function(){
           }
   
           parseLevel(root, 0);
-  
-  
-  
          // console.log(JSON.stringify(root, null, 2));
   
   
@@ -150,20 +147,20 @@ window.onload = function(){
 
 function update() {
     var nodes = flatten(root).slice(0, -1),
-        links = d3.layout.tree().links(nodes);
+    links = d3.layout.tree().links(nodes);
     // console.log(nodes);
     // Restart the force layout.
     force
-        .nodes(nodes)
-        .links(links)
-        .start();
-  
+    .nodes(nodes)
+    .links(links)
+    .start();
+    
     // Update the links…
     link = link.data(links, function(d) { return d.target.id; });
-  
+    
     // Exit any old links.
     link.exit().remove();
-  
+    
     // Enter any new links.
     link.enter().insert("line", ".node")
         .attr("class", "link")
@@ -171,6 +168,7 @@ function update() {
         .attr("y1", function(d) { return d.source.y; })
         .attr("x2", function(d) { return d.target.x; })
         .attr("y2", function(d) { return d.target.y; });
+   
   
     // Update the nodes…
     node = node.data(nodes, function(d) { return d.id; }).style("fill", color);
@@ -193,36 +191,59 @@ function update() {
             }else{
                 total = d.numbers; 
             }
+            d.total = total;
             return Math.sqrt(total)/10 || 4.5;
         })
         .style("fill", color)
-        .on("click", click)
-        .call(force.drag);
-        
-        t = t.data(nodes, function(d) { return d.id; })
-            .style("fill", color);
-
-        // Enter any new nodes.
-        t.enter().append("svg:text")
-        .attr("class", "t-node")
-        .attr("dx", "25px")
-        .attr("y", 0)
-        .text(function(d){
-            if(d.level <= 1){
-                return d.name;
-            }
-            else {
-                let yearnum = parseInt(d.year.substr(0, 4)) - 4
-                let nextYear = yearnum + 20
-                let bintext = yearnum + " - " + nextYear
-                return bintext
-            }
+        .on('mouseover', function(d){
+            tooltip.transition()
+                    .duration(200)
+                    .style("opacity", 0.6);
+                    var eX = d3.event.pageX;
+                    var eY = d3.event.pageY; 
+            tooltip.html(`
+            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                <div class="card-header">${d.level > 1? d.year : d.name}</div>
+                <div class="card-body">
+                <h5 class="card-title"> Number of Movies: ${d.total} </h5>
+                </div>
+            </div>
+            `)
+            .style("left", eX + "px")
+            .style("top", eY - 20 + "px");
         })
         .on("click", click)
+        .on("mouseout", function(d) {
+            tooltip.transition()
+                .duration(500)
+                .style("opacity", 0)
+        })
         .call(force.drag);
-
-        // Exit any old nodes.
+ 
+        t = t.data(nodes, function(d) { return d.id; });
+        
         t.exit().remove();
+        // Enter any new text.
+        t.enter().append("svg:text")
+            .attr("class", "t-node")
+            .attr("dx", "25px")
+            .attr("y", 0)
+            .style("fill", color)
+            .text(function(d){
+                if(d.level <= 1){
+                    return d.name;
+                }
+                else {
+                    let yearnum = parseInt(d.year.substr(0, 4)) - 4
+                    let nextYear = yearnum + 20
+                    let bintext = yearnum + " - " + nextYear
+                    return bintext
+                }
+            })
+            .on("click", click)
+            .call(force.drag);
+        // // Exit any old nodes.
+        // t.exit().remove();
   }
   
   function tick() {
@@ -233,13 +254,14 @@ function update() {
   
     node.attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; });
+
     t.attr("x", function(d) { return d.x; })
     .attr("y", function(d) { return d.y; }); 
   }
   
   // Color leaf nodes orange, and packages white or blue.
   function color(d) {
-    return d._children ? "#9b0535" : d.children ? "#86ff3a" : "#00dcff";
+    return d.level == 1 ? "#9b0535" : d.level == 2 ? "#86ff3a" : "#00dcff";
   }
   
   // Toggle children on click.
@@ -254,7 +276,6 @@ function update() {
         d._children = null;
       }
       if(d.level > 1){
-            
           $.getJSON(`/data/year=${d.year}&parent=${d.parent}`, function(data){
               drawPlot(data);
             })
@@ -443,12 +464,12 @@ function drawPlot(data){
         //     .style("text-anchor", "end")
         //     .text(function(d) { return d;})
 
-        //     $('html, body').animate({
-        //         scrollTop: $('#othsvg').offset().top
-        //     }, 800, function(){
-        //     // Add hash (#) to URL when done scrolling (default click behavior)
-        //         window.location.hash = '#othsvg';
-        //     });
+            $('html, body').animate({
+                scrollTop: $('#othsvg').offset().top
+            }, 800, function(){
+            // Add hash (#) to URL when done scrolling (default click behavior)
+                window.location.hash = '#othsvg';
+            });
 
   }
 
