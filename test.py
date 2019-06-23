@@ -1,8 +1,8 @@
 # #%%
-# import sys
-# import pandas as pd
-# import datetime
-# from datetime import timedelta
+import sys
+import pandas as pd
+import datetime
+from datetime import timedelta
 import json
 
 # #%%
@@ -58,4 +58,5 @@ import json
 #     })
 # print(json.dumps(mylist))
 # #%%
-print(json.dumps({"a": "Hello world"}))
+
+print(json.dumps({"a": pd}))
