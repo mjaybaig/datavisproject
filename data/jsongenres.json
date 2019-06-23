@@ -1,0 +1,825 @@
+{
+     "name": "genres",
+     "children": [
+          {
+               "name": "Action",
+               "children": [
+                    {
+                         "year": "1894-01-01",
+                         "numbers": 2
+                    },
+                    {
+                         "year": "1914-01-01",
+                         "numbers": 1024
+                    },
+                    {
+                         "year": "1934-01-01",
+                         "numbers": 1901
+                    },
+                    {
+                         "year": "1954-01-01",
+                         "numbers": 2396
+                    },
+                    {
+                         "year": "1974-01-01",
+                         "numbers": 2325
+                    },
+                    {
+                         "year": "1994-01-01",
+                         "numbers": 4133
+                    },
+                    {
+                         "year": "2014-01-01",
+                         "numbers": 2801
+                    }
+               ]
+          },
+          {
+               "name": "Adult",
+               "children": [
+                    {
+                         "year": "1954-01-01",
+                         "numbers": 326
+                    },
+                    {
+                         "year": "1974-01-01",
+                         "numbers": 2864
+                    },
+                    {
+                         "year": "1994-01-01",
+                         "numbers": 456
+                    },
+                    {
+                         "year": "2014-01-01",
+                         "numbers": 78
+                    }
+               ]
+          },
+          {
+               "name": "Adventure",
+               "children": [
+                    {
+                         "year": "1894-01-01",
+                         "numbers": 11
+                    },
+                    {
+                         "year": "1914-01-01",
+                         "numbers": 1094
+                    },
+                    {
+                         "year": "1934-01-01",
+                         "numbers": 1988
+                    },
+                    {
+                         "year": "1954-01-01",
+                         "numbers": 2122
+                    },
+                    {
+                         "year": "1974-01-01",
+                         "numbers": 798
+                    },
+                    {
+                         "year": "1994-01-01",
+                         "numbers": 1913
+                    },
+                    {
+                         "year": "2014-01-01",
+                         "numbers": 1762
+                    }
+               ]
+          },
+          {
+               "name": "Animation",
+               "children": [
+                    {
+                         "year": "1894-01-01",
+                         "numbers": 1
+                    },
+                    {
+                         "year": "1914-01-01",
+                         "numbers": 31
+                    },
+                    {
+                         "year": "1934-01-01",
+                         "numbers": 107
+                    },
+                    {
+                         "year": "1954-01-01",
+                         "numbers": 155
+                    },
+                    {
+                         "year": "1974-01-01",
+                         "numbers": 273
+                    },
+                    {
+                         "year": "1994-01-01",
+                         "numbers": 875
+                    },
+                    {
+                         "year": "2014-01-01",
+                         "numbers": 946
+                    }
+               ]
+          },
+          {
+               "name": "Biography",
+               "children": [
+                    {
+                         "year": "1894-01-01",
+                         "numbers": 8
+                    },
+                    {
+                         "year": "1914-01-01",
+                         "numbers": 98
+                    },
+                    {
+                         "year": "1934-01-01",
+                         "numbers": 343
+                    },
+                    {
+                         "year": "1954-01-01",
+                         "numbers": 351
+                    },
+                    {
+                         "year": "1974-01-01",
+                         "numbers": 276
+                    },
+                    {
+                         "year": "1994-01-01",
+                         "numbers": 1787
+                    },
+                    {
+                         "year": "2014-01-01",
+                         "numbers": 2348
+                    }
+               ]
+          },
+          {
+               "name": "Comedy",
+               "children": [
+                    {
+                         "year": "1894-01-01",
+                         "numbers": 26
+                    },
+                    {
+                         "year": "1914-01-01",
+                         "numbers": 3880
+                    },
+                    {
+                         "year": "1934-01-01",
+                         "numbers": 6202
+                    },
+                    {
+                         "year": "1954-01-01",
+                         "numbers": 6200
+                    },
+                    {
+                         "year": "1974-01-01",
+                         "numbers": 3614
+                    },
+                    {
+                         "year": "1994-01-01",
+                         "numbers": 10181
+                    },
+                    {
+                         "year": "2014-01-01",
+                         "numbers": 6704
+                    }
+               ]
+          },
+          {
+               "name": "Crime",
+               "children": [
+                    {
+                         "year": "1894-01-01",
+                         "numbers": 26
+                    },
+                    {
+                         "year": "1914-01-01",
+                         "numbers": 1259
+                    },
+                    {
+                         "year": "1934-01-01",
+                         "numbers": 2406
+                    },
+                    {
+                         "year": "1954-01-01",
+                         "numbers": 2798
+                    },
+                    {
+                         "year": "1974-01-01",
+                         "numbers": 1276
+                    },
+                    {
+                         "year": "1994-01-01",
+                         "numbers": 3075
+                    },
+                    {
+                         "year": "2014-01-01",
+                         "numbers": 1878
+                    }
+               ]
+          },
+          {
+               "name": "Documentary",
+               "children": [
+                    {
+                         "year": "1894-01-01",
+                         "numbers": 48
+                    },
+                    {
+                         "year": "1914-01-01",
+                         "numbers": 996
+                    },
+                    {
+                         "year": "1934-01-01",
+                         "numbers": 1106
+                    },
+                    {
+                         "year": "1954-01-01",
+                         "numbers": 1612
+                    },
+                    {
+                         "year": "1974-01-01",
+                         "numbers": 2176
+                    },
+                    {
+                         "year": "1994-01-01",
+                         "numbers": 15662
+                    },
+                    {
+                         "year": "2014-01-01",
+                         "numbers": 13347
+                    }
+               ]
+          },
+          {
+               "name": "Drama",
+               "children": [
+                    {
+                         "year": "1894-01-01",
+                         "numbers": 266
+                    },
+                    {
+                         "year": "1914-01-01",
+                         "numbers": 10447
+                    },
+                    {
+                         "year": "1934-01-01",
+                         "numbers": 9545
+                    },
+                    {
+                         "year": "1954-01-01",
+                         "numbers": 10936
+                    },
+                    {
+                         "year": "1974-01-01",
+                         "numbers": 6778
+                    },
+                    {
+                         "year": "1994-01-01",
+                         "numbers": 19102
+                    },
+                    {
+                         "year": "2014-01-01",
+                         "numbers": 13563
+                    }
+               ]
+          },
+          {
+               "name": "Family",
+               "children": [
+                    {
+                         "year": "1894-01-01",
+                         "numbers": 1
+                    },
+                    {
+                         "year": "1914-01-01",
+                         "numbers": 58
+                    },
+                    {
+                         "year": "1934-01-01",
+                         "numbers": 418
+                    },
+                    {
+                         "year": "1954-01-01",
+                         "numbers": 837
+                    },
+                    {
+                         "year": "1974-01-01",
+                         "numbers": 539
+                    },
+                    {
+                         "year": "1994-01-01",
+                         "numbers": 1652
+                    },
+                    {
+                         "year": "2014-01-01",
+                         "numbers": 1616
+                    }
+               ]
+          },
+          {
+               "name": "Fantasy",
+               "children": [
+                    {
+                         "year": "1894-01-01",
+                         "numbers": 6
+                    },
+                    {
+                         "year": "1914-01-01",
+                         "numbers": 163
+                    },
+                    {
+                         "year": "1934-01-01",
+                         "numbers": 316
+                    },
+                    {
+                         "year": "1954-01-01",
+                         "numbers": 702
+                    },
+                    {
+                         "year": "1974-01-01",
+                         "numbers": 551
+                    },
+                    {
+                         "year": "1994-01-01",
+                         "numbers": 1208
+                    },
+                    {
+                         "year": "2014-01-01",
+                         "numbers": 1014
+                    }
+               ]
+          },
+          {
+               "name": "Film-Noir",
+               "children": [
+                    {
+                         "year": "1914-01-01",
+                         "numbers": 13
+                    },
+                    {
+                         "year": "1934-01-01",
+                         "numbers": 558
+                    },
+                    {
+                         "year": "1954-01-01",
+                         "numbers": 190
+                    }
+               ]
+          },
+          {
+               "name": "Game-Show",
+               "children": [
+                    {
+                         "year": "1994-01-01",
+                         "numbers": 1
+                    },
+                    {
+                         "year": "2014-01-01",
+                         "numbers": 1
+                    }
+               ]
+          },
+          {
+               "name": "History",
+               "children": [
+                    {
+                         "year": "1894-01-01",
+                         "numbers": 14
+                    },
+                    {
+                         "year": "1914-01-01",
+                         "numbers": 250
+                    },
+                    {
+                         "year": "1934-01-01",
+                         "numbers": 495
+                    },
+                    {
+                         "year": "1954-01-01",
+                         "numbers": 592
+                    },
+                    {
+                         "year": "1974-01-01",
+                         "numbers": 281
+                    },
+                    {
+                         "year": "1994-01-01",
+                         "numbers": 1401
+                    },
+                    {
+                         "year": "2014-01-01",
+                         "numbers": 1547
+                    }
+               ]
+          },
+          {
+               "name": "Horror",
+               "children": [
+                    {
+                         "year": "1894-01-01",
+                         "numbers": 1
+                    },
+                    {
+                         "year": "1914-01-01",
+                         "numbers": 172
+                    },
+                    {
+                         "year": "1934-01-01",
+                         "numbers": 239
+                    },
+                    {
+                         "year": "1954-01-01",
+                         "numbers": 865
+                    },
+                    {
+                         "year": "1974-01-01",
+                         "numbers": 819
+                    },
+                    {
+                         "year": "1994-01-01",
+                         "numbers": 3277
+                    },
+                    {
+                         "year": "2014-01-01",
+                         "numbers": 3021
+                    }
+               ]
+          },
+          {
+               "name": "Music",
+               "children": [
+                    {
+                         "year": "1894-01-01",
+                         "numbers": 3
+                    },
+                    {
+                         "year": "1914-01-01",
+                         "numbers": 81
+                    },
+                    {
+                         "year": "1934-01-01",
+                         "numbers": 930
+                    },
+                    {
+                         "year": "1954-01-01",
+                         "numbers": 369
+                    },
+                    {
+                         "year": "1974-01-01",
+                         "numbers": 241
+                    },
+                    {
+                         "year": "1994-01-01",
+                         "numbers": 1428
+                    },
+                    {
+                         "year": "2014-01-01",
+                         "numbers": 1056
+                    }
+               ]
+          },
+          {
+               "name": "Musical",
+               "children": [
+                    {
+                         "year": "1914-01-01",
+                         "numbers": 390
+                    },
+                    {
+                         "year": "1934-01-01",
+                         "numbers": 1505
+                    },
+                    {
+                         "year": "1954-01-01",
+                         "numbers": 1219
+                    },
+                    {
+                         "year": "1974-01-01",
+                         "numbers": 209
+                    },
+                    {
+                         "year": "1994-01-01",
+                         "numbers": 508
+                    },
+                    {
+                         "year": "2014-01-01",
+                         "numbers": 382
+                    }
+               ]
+          },
+          {
+               "name": "Mystery",
+               "children": [
+                    {
+                         "year": "1894-01-01",
+                         "numbers": 5
+                    },
+                    {
+                         "year": "1914-01-01",
+                         "numbers": 520
+                    },
+                    {
+                         "year": "1934-01-01",
+                         "numbers": 973
+                    },
+                    {
+                         "year": "1954-01-01",
+                         "numbers": 658
+                    },
+                    {
+                         "year": "1974-01-01",
+                         "numbers": 326
+                    },
+                    {
+                         "year": "1994-01-01",
+                         "numbers": 1491
+                    },
+                    {
+                         "year": "2014-01-01",
+                         "numbers": 1310
+                    }
+               ]
+          },
+          {
+               "name": "News",
+               "children": [
+                    {
+                         "year": "1894-01-01",
+                         "numbers": 1
+                    },
+                    {
+                         "year": "1914-01-01",
+                         "numbers": 3
+                    },
+                    {
+                         "year": "1934-01-01",
+                         "numbers": 3
+                    },
+                    {
+                         "year": "1954-01-01",
+                         "numbers": 3
+                    },
+                    {
+                         "year": "1994-01-01",
+                         "numbers": 204
+                    },
+                    {
+                         "year": "2014-01-01",
+                         "numbers": 365
+                    }
+               ]
+          },
+          {
+               "name": "Reality-TV",
+               "children": [
+                    {
+                         "year": "1934-01-01",
+                         "numbers": 1
+                    },
+                    {
+                         "year": "1994-01-01",
+                         "numbers": 20
+                    },
+                    {
+                         "year": "2014-01-01",
+                         "numbers": 38
+                    }
+               ]
+          },
+          {
+               "name": "Romance",
+               "children": [
+                    {
+                         "year": "1894-01-01",
+                         "numbers": 24
+                    },
+                    {
+                         "year": "1914-01-01",
+                         "numbers": 2541
+                    },
+                    {
+                         "year": "1934-01-01",
+                         "numbers": 3204
+                    },
+                    {
+                         "year": "1954-01-01",
+                         "numbers": 2554
+                    },
+                    {
+                         "year": "1974-01-01",
+                         "numbers": 1454
+                    },
+                    {
+                         "year": "1994-01-01",
+                         "numbers": 4374
+                    },
+                    {
+                         "year": "2014-01-01",
+                         "numbers": 2373
+                    }
+               ]
+          },
+          {
+               "name": "Sci-Fi",
+               "children": [
+                    {
+                         "year": "1894-01-01",
+                         "numbers": 1
+                    },
+                    {
+                         "year": "1914-01-01",
+                         "numbers": 59
+                    },
+                    {
+                         "year": "1934-01-01",
+                         "numbers": 150
+                    },
+                    {
+                         "year": "1954-01-01",
+                         "numbers": 523
+                    },
+                    {
+                         "year": "1974-01-01",
+                         "numbers": 345
+                    },
+                    {
+                         "year": "1994-01-01",
+                         "numbers": 1125
+                    },
+                    {
+                         "year": "2014-01-01",
+                         "numbers": 974
+                    }
+               ]
+          },
+          {
+               "name": "Short",
+               "children": [
+                    {
+                         "year": "1914-01-01",
+                         "numbers": 2
+                    },
+                    {
+                         "year": "1994-01-01",
+                         "numbers": 2
+                    }
+               ]
+          },
+          {
+               "name": "Sport",
+               "children": [
+                    {
+                         "year": "1894-01-01",
+                         "numbers": 8
+                    },
+                    {
+                         "year": "1914-01-01",
+                         "numbers": 136
+                    },
+                    {
+                         "year": "1934-01-01",
+                         "numbers": 210
+                    },
+                    {
+                         "year": "1954-01-01",
+                         "numbers": 158
+                    },
+                    {
+                         "year": "1974-01-01",
+                         "numbers": 121
+                    },
+                    {
+                         "year": "1994-01-01",
+                         "numbers": 694
+                    },
+                    {
+                         "year": "2014-01-01",
+                         "numbers": 563
+                    }
+               ]
+          },
+          {
+               "name": "Talk-Show",
+               "children": [
+                    {
+                         "year": "1934-01-01",
+                         "numbers": 1
+                    },
+                    {
+                         "year": "1974-01-01",
+                         "numbers": 2
+                    },
+                    {
+                         "year": "1994-01-01",
+                         "numbers": 7
+                    },
+                    {
+                         "year": "2014-01-01",
+                         "numbers": 10
+                    }
+               ]
+          },
+          {
+               "name": "Thriller",
+               "children": [
+                    {
+                         "year": "1894-01-01",
+                         "numbers": 3
+                    },
+                    {
+                         "year": "1914-01-01",
+                         "numbers": 167
+                    },
+                    {
+                         "year": "1934-01-01",
+                         "numbers": 475
+                    },
+                    {
+                         "year": "1954-01-01",
+                         "numbers": 1029
+                    },
+                    {
+                         "year": "1974-01-01",
+                         "numbers": 968
+                    },
+                    {
+                         "year": "1994-01-01",
+                         "numbers": 4167
+                    },
+                    {
+                         "year": "2014-01-01",
+                         "numbers": 3430
+                    }
+               ]
+          },
+          {
+               "name": "War",
+               "children": [
+                    {
+                         "year": "1894-01-01",
+                         "numbers": 12
+                    },
+                    {
+                         "year": "1914-01-01",
+                         "numbers": 376
+                    },
+                    {
+                         "year": "1934-01-01",
+                         "numbers": 940
+                    },
+                    {
+                         "year": "1954-01-01",
+                         "numbers": 1002
+                    },
+                    {
+                         "year": "1974-01-01",
+                         "numbers": 344
+                    },
+                    {
+                         "year": "1994-01-01",
+                         "numbers": 698
+                    },
+                    {
+                         "year": "2014-01-01",
+                         "numbers": 413
+                    }
+               ]
+          },
+          {
+               "name": "Western",
+               "children": [
+                    {
+                         "year": "1894-01-01",
+                         "numbers": 7
+                    },
+                    {
+                         "year": "1914-01-01",
+                         "numbers": 1640
+                    },
+                    {
+                         "year": "1934-01-01",
+                         "numbers": 1646
+                    },
+                    {
+                         "year": "1954-01-01",
+                         "numbers": 1081
+                    },
+                    {
+                         "year": "1974-01-01",
+                         "numbers": 61
+                    },
+                    {
+                         "year": "1994-01-01",
+                         "numbers": 155
+                    },
+                    {
+                         "year": "2014-01-01",
+                         "numbers": 115
+                    }
+               ]
+          }
+     ]
+}
