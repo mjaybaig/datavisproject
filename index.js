@@ -22,10 +22,16 @@ app.get('/data/year=:year&parent=:parent', (req, res) => {
     let genre = req.params["parent"];
 
     // console.log(__filename)
-    var spawn = require("child_process").spawn;
-    var process = spawn('python', ["./test.py",
-        year, genre
-    ]);
+    try{
+        var spawn = require("child_process").spawn;
+        var process = spawn('python', ["./test.py",
+            year, genre
+        ]);
+    }
+    catch(e){
+        console.log(e);
+        res.send({error: e.message});
+    }
     process.stdout.on("data", function (data) {
         // console.log(data.toString());
         try{
