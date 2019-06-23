@@ -24,7 +24,7 @@ app.get('/data/year=:year&parent=:parent', (req, res) => {
     // console.log(__filename)
     try{
         var spawn = require("child_process").spawn;
-        var process = spawn('python', ["./test.py",
+        var process = spawn('python', ["./moviewrangler.py",
             year, genre
         ]);
     }
