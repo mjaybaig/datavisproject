@@ -1,13 +1,13 @@
 # #%%
-# import sys
+import sys
 import pandas as pd
-# import datetime
-# from datetime import timedelta
+import datetime
+from datetime import timedelta
 import json
 
 # #%%
-# year = sys.argv[1] 
-# genre = sys.argv[2]
+year = sys.argv[1] 
+genre = sys.argv[2]
 
 # # datafile = pd.read_csv('data/mergedbudget_rev.csv')
 # datafile = pd.read_csv('data/dataregion.csv')
@@ -58,5 +58,4 @@ import json
 #     })
 # print(json.dumps(mylist))
 # #%%
-
-print(json.dumps({"a": pd}))
+print(json.dumps({"year": year, "genre": genre}))
