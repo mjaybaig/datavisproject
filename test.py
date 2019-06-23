@@ -3,7 +3,7 @@
 # import pandas as pd
 # import datetime
 # from datetime import timedelta
-# import json
+import json
 
 # #%%
 # year = sys.argv[1] 
@@ -58,4 +58,4 @@
 #     })
 # print(json.dumps(mylist))
 # #%%
-print({"a": "Hello world"})
+print(json.dumps({"a": "Hello world"}))
