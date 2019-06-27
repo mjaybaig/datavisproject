@@ -31,6 +31,10 @@ div.my-info{
   stroke: #000;
 }
 
+circle.node, text.t-node{
+  cursor: pointer;
+}
+
 .tooltip {
   position: absolute;
   width: auto;
