@@ -2,13 +2,13 @@ body{
     background-color:#0a2930;
 }
 svg{
-    width: -webkit-fill-available;
-    height: -webkit-fill-available;
+    width: 100%;
+    height: 100%;
 }
 
 .row{
-    width: 100%;
-    height: 90%
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
 }
 
 line.link {
