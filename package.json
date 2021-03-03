@@ -21,7 +21,7 @@
     "morgan": "^1.9.1",
     "nodemon": "^1.18.9",
     "popper.js": "^1.14.6",
-    "pug": "^2.0.3",
+    "pug": "^3.0.1",
     "r-script": "git+https://git@github.com/khamurdik/r-script.git",
     "script-loader": "^0.7.2",
     "style-loader": "^0.23.1",
